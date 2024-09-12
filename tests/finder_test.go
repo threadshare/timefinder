@@ -203,4 +203,16 @@ func TestWeekDay(t *testing.T) {
 	extract = segmenter.TimeExtract(msg)
 	fmt.Println(msg)
 	fmt.Println(extract[0].Format(timeFormat))
+
+	// 最近一周提醒我做事
+	msg = "最近一周提醒我做事"
+	extract = segmenter.TimeExtract(msg)
+	fmt.Println(msg)
+	fmt.Println(extract[0].Format(timeFormat))
+
+	// 最近一个月提醒我做事
+	msg = "最近一个月提醒我做事"
+	extract = segmenter.TimeExtract(msg)
+	fmt.Println(msg)
+	fmt.Println(extract[0].Format(timeFormat))
 }

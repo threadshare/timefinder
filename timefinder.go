@@ -173,6 +173,14 @@ func parseDatetime(msg string) (parseTime time.Time) {
 		}
 	}
 
+	recentMonthRegex := regexp.MustCompile(`最近\s*([0-9零一二两三四五六七八九十]+)\s*个?月`)
+	if match := recentMonthRegex.FindStringSubmatch(msg); len(match) > 1 {
+		months := cn2dig(match[1])
+		if months > 0 {
+			return time.Now().AddDate(0, -months, 0)
+		}
+	}
+
 	var targetDate string
 
 	compile, err := regexp.Compile("" +
@@ -485,6 +493,7 @@ func (tf *TimeFinder) TimeExtract(text string) (finalRes []time.Time) {
 
 	for _, ele := range result {
 		if !parseDatetime(ele).IsZero() {
+			fmt.Println(ele)
 			finalRes = append(finalRes, parseDatetime(ele))
 		}
 	}
